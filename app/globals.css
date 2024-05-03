@@ -18,12 +18,21 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+input {
+  @apply border bg-transparent
+}
+
+button {
+  @apply border rounded p-2;
+}
+
+section {
+  @apply bg-zinc-800 p-8
 }
 
 @layer utilities {
