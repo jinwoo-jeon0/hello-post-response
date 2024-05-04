@@ -4,6 +4,9 @@ export default function Form({ action }: { action: string; }) {
       <h1>post to <code>{action}</code></h1>
       <form method="post" action={action}>
         <p>
+          status: <input name="status" defaultValue="303" />
+        </p>
+        <p>
           id: <input name="id" defaultValue="A" />
         </p>
         <p>

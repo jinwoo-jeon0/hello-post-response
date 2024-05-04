@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   return NextResponse.json(
     body,
     {
-      status: body.status ?? 303,
+      status: body.status,
       headers: {
         'Location': '/foo/A',
         'Content-Location': '/api/foo/A',
