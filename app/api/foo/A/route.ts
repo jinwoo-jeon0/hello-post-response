@@ -9,13 +9,15 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const body: Record<string, unknown> = {};
-  (await request.formData()).forEach((value, key) => body[key] = value)
+  const contentType = request.headers.get('content-type');
+  const body: Record<string, unknown> & { status?: number; } = contentType?.match(/text/) ? await request.json() : {}
+  if (contentType?.match(/form/))
+    (await request.formData()).forEach((value, key) => body[key] = value)
 
   return NextResponse.json(
     body,
     {
-      status: 303,
+      status: body.status ?? 303,
       headers: {
         'Location': '/foo/A',
         'Content-Location': '/api/foo/A',

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import Result from "./result";
 
 export default function ClientGet({ url }: { url: string; }) {
   const [resource, setResource] = useState<Record<string, unknown> | null>(null)
@@ -28,14 +29,5 @@ export default function ClientGet({ url }: { url: string; }) {
     })()
   }, [url])
 
-  return (<>
-    {resource && <div>resource:
-      <pre>
-        <code>
-          {JSON.stringify(resource, undefined, 2)}
-        </code>
-      </pre>
-    </div>}
-    {error && <div>error: {`${error}`}</div>}
-  </>)
+  return <Result resource={resource} error={error} />
 }
