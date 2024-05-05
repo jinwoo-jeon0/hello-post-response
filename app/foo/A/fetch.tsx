@@ -8,14 +8,14 @@ export default function Fetch() {
   const [error, setError] = useState<React.ComponentProps<typeof Result>['error']>(null)
   const url = '/api/foo/A';
 
-  async function post() {
+  async function post(serialized: Record<string, string>) {
     try {
       const response = await fetch(
         url,
         {
           method: 'post',
           body: JSON.stringify({
-            status: 201,
+            ...serialized,
             id: 'A',
             from: 'fetch post',
           }),
@@ -41,9 +41,23 @@ export default function Fetch() {
   }
 
   return (<>
-    <p>
-      <button type="button" onClick={post}>post to {url}</button>
-    </p>
+    <form onSubmit={(formEvent) => {
+      formEvent.preventDefault()
+      const serialized: Parameters<typeof post>[0] = {}
+      new FormData(formEvent.currentTarget).forEach((value, key) => serialized[key] = value.toString())
+      post(serialized)
+      return false
+    }}>
+      <p>
+        status: <input type="text" name="status" defaultValue={201} />
+      </p>
+      <p>
+        Location: <input type="text" name="Location" defaultValue="/api/foo/A" />
+      </p>
+      <p>
+        <button type="submit">post to {url}</button>
+      </p>
+    </form>
     <p>
       <button type="button" onClick={get}>get from {url}</button>
     </p>

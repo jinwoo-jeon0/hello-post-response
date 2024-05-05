@@ -7,6 +7,9 @@ export default function Form({ action }: { action: string; }) {
           status: <input name="status" defaultValue="303" />
         </p>
         <p>
+          Location: <input name="Location" defaultValue="/foo/A" />
+        </p>
+        <p>
           id: <input name="id" defaultValue="A" />
         </p>
         <p>
