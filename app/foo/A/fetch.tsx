@@ -19,6 +19,9 @@ export default function Fetch() {
             id: 'A',
             from: 'fetch post',
           }),
+          headers: {
+            'Cache-Control': 'max-age=604800',
+          }
         }
       )
       setResource(await response.json())
