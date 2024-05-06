@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   return NextResponse.json({ id: 'B', from: 'get' }, {
     headers: {
-      'Cache-Control': 'public, s-maxage=604800, max-age=604800, age=0',
+      'Cache-Control': 'max-age=604800',
     }
   })
 }
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       headers: {
         ...body.Location && { 'Location': body.Location },
         'Content-Location': '/api/foo/A',
-        'Cache-Control': 'public, s-maxage=604800, max-age=604800, age=0',
+        'Cache-Control': request.headers.get('Cache-Control') ?? '',
       }
     }
   )
