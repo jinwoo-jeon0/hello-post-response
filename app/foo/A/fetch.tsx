@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import Result from "./result";
 
+const application_json = 'application/json'
+const Accept = application_json
+
 export default function Fetch() {
   const [resource, setResource] = useState<React.ComponentProps<typeof Result>['resource']>(null)
   const [error, setError] = useState<React.ComponentProps<typeof Result>['error']>(null)
@@ -20,6 +23,8 @@ export default function Fetch() {
             from: 'fetch post',
           }),
           headers: {
+            Accept,
+            'Content-Type': application_json,
             'Cache-Control': 'max-age=604800',
           }
         }
@@ -34,7 +39,7 @@ export default function Fetch() {
 
   async function get() {
     try {
-      const response = await fetch(url)
+      const response = await fetch(url, { headers: { Accept } })
       setResource(await response.json())
       setError(null)
     } catch (error) {
