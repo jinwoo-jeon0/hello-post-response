@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const contentType = request.headers.get('content-type');
-  const body: Record<string, unknown> & { status?: number; Location?: string } = contentType?.match(/text/) ? await request.json() : {}
+  const body: Record<string, unknown> & { status?: number; Location?: string } = contentType?.match(/json/) ? await request.json() : {}
   if (contentType?.match(/form/))
     (await request.formData()).forEach((value, key) => body[key] = value)
 
